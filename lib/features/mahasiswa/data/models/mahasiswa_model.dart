@@ -1,32 +1,36 @@
 // File: lib/features/mahasiswa/data/models/mahasiswa_model.dart
 class MahasiswaModel {
-  final String nama;
-  final String nim;
-  final String jurusan;
-  final String angkatan;
+  final int postId;
+  final int id;
+  final String name;      // dari API = name
+  final String email;     // dari API = email
+  final String body;      // dari API = body
 
   MahasiswaModel({
-    required this.nama,
-    required this.nim,
-    required this.jurusan,
-    required this.angkatan,
+    required this.postId,
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.body,
   });
 
   factory MahasiswaModel.fromJson(Map<String, dynamic> json) {
     return MahasiswaModel(
-      nama: json['nama'] ?? '',
-      nim: json['nim'] ?? '',
-      jurusan: json['jurusan'] ?? '',
-      angkatan: json['angkatan'] ?? '',
+      postId: json['postId'] ?? 0,
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      email: json['email'] ?? '',
+      body: json['body'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'nama': nama,
-      'nim': nim,
-      'jurusan': jurusan,
-      'angkatan': angkatan,
+      'postId': postId,
+      'id': id,
+      'name': name,
+      'email': email,
+      'body': body,
     };
   }
 }

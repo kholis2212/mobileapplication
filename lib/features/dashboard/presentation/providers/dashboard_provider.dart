@@ -1,4 +1,3 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_application_1/features/dashboard/data/model/dashboard_model.dart';
 import 'package:flutter_application_1/features/dashboard/data/repositories/dashboard_repository.dart';
@@ -18,7 +17,10 @@ final dashboardDataProvider = FutureProvider.autoDispose<DashboardData>((ref) as
 class DashboardNotifier extends StateNotifier<AsyncValue<DashboardData>> {
   final DashboardRepository _repository;
 
-  DashboardNotifier(this._repository) : super(const AsyncValue.loading());
+  DashboardNotifier(this._repository) : super(const AsyncValue.loading()) {
+    // Memuat data secara otomatis saat notifier dibuat
+    loadDashboard();
+  }
 
   /// Load dashboard data from repository
   Future<void> loadDashboard() async {

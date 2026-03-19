@@ -14,15 +14,20 @@ class MahasiswaCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: ListTile(
         leading: CircleAvatar(
-          child: Text(mahasiswa.nama[0]),
+          child: Text(mahasiswa.name.isNotEmpty ? mahasiswa.name[0] : '?'),
         ),
-        title: Text(mahasiswa.nama),
+        title: Text(mahasiswa.name),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('NIM: ${mahasiswa.nim}'),
-            Text('Jurusan: ${mahasiswa.jurusan}'),
-            Text('Angkatan: ${mahasiswa.angkatan}'),
+            Text('Email: ${mahasiswa.email}'),
+            const SizedBox(height: 4),
+            Text(
+              mahasiswa.body,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 12),
+            ),
           ],
         ),
         isThreeLine: true,

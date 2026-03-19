@@ -41,14 +41,14 @@ class MahasiswaPage extends ConsumerWidget {
                     showDialog(
                       context: context,
                       builder: (dialogContext) => AlertDialog(
-                        title: Text(m.nama),
+                        title: Text(m.name),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('NIM: ${m.nim}'),
-                            Text('Jurusan: ${m.jurusan}'),
-                            Text('Angkatan: ${m.angkatan}'),
+                            Text('Email: ${m.email}'),
+                            const SizedBox(height: 8),
+                            Text('Komentar: ${m.body}'),
                           ],
                         ),
                         actions: [

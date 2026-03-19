@@ -1,4 +1,5 @@
 // File: lib/features/mahasiswa_aktif/presentation/pages/mahasiswa_aktif_page.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/widgets/common_widgets.dart';
@@ -14,7 +15,7 @@ class MahasiswaAktifPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mahasiswa Aktif'),
+        title: const Text('Mahasiswa Aktif (Posts)'),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -41,14 +42,15 @@ class MahasiswaAktifPage extends ConsumerWidget {
                     showDialog(
                       context: context,
                       builder: (dialogContext) => AlertDialog(
-                        title: Text(m.nama),
+                        title: Text(m.title),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('NIM: ${m.nim}'),
-                            Text('Jurusan: ${m.jurusan}'),
-                            Text('Semester: ${m.semester}'),
+                            Text('User ID: ${m.userId}'),
+                            Text('Post ID: ${m.id}'),
+                            const SizedBox(height: 8),
+                            Text(m.body),
                           ],
                         ),
                         actions: [
