@@ -63,3 +63,6 @@ final selectedStatIndexProvider = StateProvider<int>((ref) => 0);
 
 // Theme mode: false = light, true = dark
 final themeModeProvider = StateProvider<bool>((ref) => false);
+
+
+

@@ -1,33 +1,26 @@
-// File: lib/features/dosen/data/repositories/dosen_repository.dart
+import 'package:flutter_application_1/core/network/dio_client.dart';
+import 'package:flutter_application_1/features/dosen/data/models/dosen_model.dart';
 import 'package:dio/dio.dart';
-import '../models/dosen_model.dart';
 
 class DosenRepository {
-  final Dio _dio = Dio(BaseOptions(
-    baseUrl: 'https://jsonplaceholder.typicode.com',
-    connectTimeout: const Duration(seconds: 5),
-    receiveTimeout: const Duration(seconds: 3),
-    headers: {'Accept': 'application/json'},
-  ));
+  final DioClient _dioClient;
 
-  // Mendapatkan daftar dosen dari API menggunakan Dio
+  // Jika tidak ada dioClient yang dimasukkan, otomatis membuat yang baru
+  DosenRepository({DioClient? dioClient})
+      : _dioClient = dioClient ?? DioClient();
+
+  /// Fungsi untuk mengambil daftar dosen dari API
   Future<List<DosenModel>> getDosenList() async {
     try {
-      final response = await _dio.get('/users');
+      final Response response = await _dioClient.dio.get('/users');
+      final List<dynamic> data = response.data;
       
-      if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;
-        return data.map((json) => DosenModel.fromJson(json)).toList();
-      } else {
-        throw Exception('Gagal memuat data dosen: ${response.statusCode}');
-      }
+      // Mengubah setiap data JSON menjadi objek DosenModel
+      return data.map((json) => DosenModel.fromJson(json)).toList();
     } on DioException catch (e) {
-      throw Exception('Dio error: ${e.message}');
-    } catch (e) {
-      throw Exception('Error: $e');
+      throw Exception(
+        'Gagal memuat data dosen: ${e.response?.statusCode ?? ""} ${e.message}',
+      );
     }
   }
-
-  // Optional: method dengan HTTP biasa (untuk perbandingan)
-  // Future<List<DosenModel>> getDosenListWithHttp() async { ... }
 }
